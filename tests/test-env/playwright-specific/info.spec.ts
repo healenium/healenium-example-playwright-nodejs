@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 
 const TIMEOUT = 3000;
-const WAIT_TIMEOUT = 250;
 
 test.describe('Locator API - Information Methods - Tests', () => {
   test.beforeEach(async ({ page }) => {
@@ -10,56 +9,47 @@ test.describe('Locator API - Information Methods - Tests', () => {
 
   test('textContent method', async ({ page }) => {
     test.slow();
-    const inputField = page.locator('.test_class');
+    const inputField = page.locator('#select_item option[value="1"]');
     const textContent = await inputField.textContent({ timeout: TIMEOUT });
-    console.log('Input textContent:', textContent);
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
-    expect(submitBtn).not.toBeNull();
     await submitBtn.click();
-    await page.waitForTimeout(WAIT_TIMEOUT);
 
     // Test healing - same action should work after locator change
-    const healedInputField = page.locator('.test_class');
+    const healedInputField = page.locator('#select_item option[value="1"]');
     const healedTextContent = await healedInputField.textContent({ timeout: TIMEOUT });
-    console.log('Healed input textContent:', healedTextContent);
+    expect(healedTextContent).toBe(textContent);
   });
 
   test('innerText method', async ({ page }) => {
     test.slow();
-    const linkElement = page.locator('a:has-text("Change: LinkText, PartialLinkText")');
-    const innerText = await linkElement.innerText({ timeout: TIMEOUT });
-    console.log('Link innerText:', innerText);
+    const element = page.locator('[name="dragRed"]');
+    const innerText = await element.innerText({ timeout: TIMEOUT });
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
-    expect(submitBtn).not.toBeNull();
     await submitBtn.click();
-    await page.waitForTimeout(WAIT_TIMEOUT);
 
     // Test healing - same action should work after locator change
-    const healedLinkElement = page.locator('a:has-text("Change: LinkText, PartialLinkText")');
-    const healedInnerText = await healedLinkElement.innerText({ timeout: TIMEOUT });
-    console.log('Healed link innerText:', healedInnerText);
+    const healedElement = page.locator('[name="dragRed"]');
+    const healedInnerText = await healedElement.innerText({ timeout: TIMEOUT });
+    expect(healedInnerText).toBe(innerText);
   });
 
   test('innerHTML method', async ({ page }) => {
     test.slow();
-    const linkElement = page.locator('a:has-text("Change: LinkText, PartialLinkText")');
-    const innerHTML = await linkElement.innerHTML({ timeout: TIMEOUT });
-    console.log('Child tag innerHTML:', innerHTML);
+    const element = page.locator('[name="dragRed"]');
+    const innerHTML = await element.innerHTML({ timeout: TIMEOUT });
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
-    expect(submitBtn).not.toBeNull();
     await submitBtn.click();
-    await page.waitForTimeout(WAIT_TIMEOUT);
 
     // Test healing - same action should work after locator change
-    const healedLinkElement = page.locator('a:has-text("Change: LinkText, PartialLinkText")');
-    const healedInnerHTML = await healedLinkElement.innerHTML({ timeout: TIMEOUT });
-    console.log('Healed child tag innerHTML:', healedInnerHTML);
+    const healedElement = page.locator('[name="dragRed"]');
+    const healedInnerHTML = await healedElement.innerHTML({ timeout: TIMEOUT });
+    expect(healedInnerHTML).toBe(innerHTML);
   });
 
   test('inputValue method', async ({ page }) => {
@@ -71,9 +61,7 @@ test.describe('Locator API - Information Methods - Tests', () => {
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
-    expect(submitBtn).not.toBeNull();
     await submitBtn.click();
-    await page.waitForTimeout(WAIT_TIMEOUT);
 
     // Test healing - same action should work after locator change
     const healedInputField = page.locator('.test_class');
@@ -90,9 +78,7 @@ test.describe('Locator API - Information Methods - Tests', () => {
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
-    expect(submitBtn).not.toBeNull();
     await submitBtn.click();
-    await page.waitForTimeout(WAIT_TIMEOUT);
 
     // Test healing - same action should work after locator change
     const healedInputField = page.locator('.test_class');
@@ -102,20 +88,18 @@ test.describe('Locator API - Information Methods - Tests', () => {
 
   test('boundingBox method', async ({ page }) => {
     test.slow();
-    const inputField = page.locator('.test_class');
+    const inputField = page.locator('#select_item');
     const boundingBox = await inputField.boundingBox({ timeout: TIMEOUT });
-    console.log('Input bounding box:', boundingBox);
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
-    expect(submitBtn).not.toBeNull();
     await submitBtn.click();
-    await page.waitForTimeout(WAIT_TIMEOUT);
 
     // Test healing - same action should work after locator change
-    const healedInputField = page.locator('.test_class');
+    const healedInputField = page.locator('#select_item');
     const healedBoundingBox = await healedInputField.boundingBox({ timeout: TIMEOUT });
-    console.log('Healed input bounding box:', healedBoundingBox);
+    expect(healedBoundingBox!.width).toBe(boundingBox!.width);
+    expect(healedBoundingBox!.height).toBe(boundingBox!.height);
   });
 
   test('isEnabled method', async ({ page }) => {
@@ -126,9 +110,7 @@ test.describe('Locator API - Information Methods - Tests', () => {
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
-    expect(submitBtn).not.toBeNull();
     await submitBtn.click();
-    await page.waitForTimeout(WAIT_TIMEOUT);
 
     // Test healing - same action should work after locator change
     const healedInputField = page.locator('.test_class');
@@ -144,9 +126,7 @@ test.describe('Locator API - Information Methods - Tests', () => {
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
-    expect(submitBtn).not.toBeNull();
     await submitBtn.click();
-    await page.waitForTimeout(500);
 
     // Test healing - same action should work after locator change
     const healedInputField = page.locator('.test_class');
@@ -162,9 +142,7 @@ test.describe('Locator API - Information Methods - Tests', () => {
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
-    expect(submitBtn).not.toBeNull();
     await submitBtn.click();
-    await page.waitForTimeout(WAIT_TIMEOUT);
 
     // Test healing - same action should work after locator change
     const healedInputField = page.locator('.test_class');
@@ -173,7 +151,7 @@ test.describe('Locator API - Information Methods - Tests', () => {
   });
 
   /*
-      Can not save 'isVisible' and 'isHidden' due to success/fail ambiguity
+      Can not heal 'isVisible' and 'isHidden' due to success/fail ambiguity
       // IS VISIBLE
       const isInputVisible = await inputField.isVisible({ timeout });
       // {"id":24,"guid":"frame@270394fb70b41528f6132d58fd4cb769","method":"isVisible","params":{"selector":".test_class","strict":true},"metadata":{}}
@@ -187,4 +165,3 @@ test.describe('Locator API - Information Methods - Tests', () => {
       // {"id":26,"result":{"value":true}}  - there is no element with such 'selector'
   */
 });
-
