@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 
 const TIMEOUT = 5000;
-const WAIT_TIMEOUT = 250;
 
 test.describe('Locator API - Utility Methods - Tests', () => {
   test.beforeEach(async ({ page }) => {
@@ -26,9 +25,7 @@ test.describe('Locator API - Utility Methods - Tests', () => {
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
-    expect(submitBtn).not.toBeNull();
     await submitBtn.click();
-    await page.waitForTimeout(WAIT_TIMEOUT);
 
     // Test healing - same actions should work after locator change
     const healedChangeIdInput = page.locator('input#change_id')
@@ -51,7 +48,6 @@ test.describe('Locator API - Utility Methods - Tests', () => {
     const changeIdInput = page.locator('input#change_id');
     const inputAriaSnapshot = await changeIdInput.ariaSnapshot({ timeout: TIMEOUT });
     const stringifiedInputAriaSnapshot = JSON.stringify(inputAriaSnapshot, null, 2);
-    console.log('Input ARIA Snapshot:', stringifiedInputAriaSnapshot);
 
     // Verify snapshot contain expected properties
     expect(inputAriaSnapshot).toBeDefined();
@@ -59,15 +55,12 @@ test.describe('Locator API - Utility Methods - Tests', () => {
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
-    expect(submitBtn).not.toBeNull();
     await submitBtn.click();
-    await page.waitForTimeout(WAIT_TIMEOUT);
 
     // Test healing - same action should work after locator change
     const healedChangeIdInput = page.locator('input#change_id');
     const healedInputAriaSnapshot = await healedChangeIdInput.ariaSnapshot({ timeout: TIMEOUT });
     const healedStringifiedInputAriaSnapshot = JSON.stringify(healedInputAriaSnapshot, null, 2);
-    console.log('Healed Input ARIA Snapshot:', healedStringifiedInputAriaSnapshot);
 
     // Verify snapshot contain expected properties
     expect(healedInputAriaSnapshot).toBeDefined();
@@ -88,9 +81,7 @@ test.describe('Locator API - Utility Methods - Tests', () => {
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
-    expect(submitBtn).not.toBeNull();
     await submitBtn.click();
-    await page.waitForTimeout(WAIT_TIMEOUT);
 
     // Test healing - same actions should work after locator change
     const healedInputField = page.locator('.test_class');
@@ -118,9 +109,7 @@ test.describe('Locator API - Utility Methods - Tests', () => {
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
-    expect(submitBtn).not.toBeNull();
     await submitBtn.click();
-    await page.waitForTimeout(WAIT_TIMEOUT);
 
     // Test healing - same actions should work after locator change
     const healedTestClassInput = page.locator('.test_class');
@@ -149,9 +138,7 @@ test.describe('Locator API - Utility Methods - Tests', () => {
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
-    expect(submitBtn).not.toBeNull();
     await submitBtn.click();
-    await page.waitForTimeout(WAIT_TIMEOUT);
 
     // Test healing - same actions should work after locator change
     const healedTestClassInput = page.locator('.test_class');
@@ -167,4 +154,3 @@ test.describe('Locator API - Utility Methods - Tests', () => {
   });
 
 });
-

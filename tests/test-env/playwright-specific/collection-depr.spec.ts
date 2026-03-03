@@ -1,6 +1,5 @@
 import { test, expect } from '@playwright/test';
 const TIMEOUT = 5000;
-const WAIT_TIMEOUT = 250;
 
 test.describe('Deprecated ElementHandle Methods - Tests', () => {
   test.beforeEach(async ({ page }) => {
@@ -15,9 +14,7 @@ test.describe('Deprecated ElementHandle Methods - Tests', () => {
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
-    expect(submitBtn).not.toBeNull();
-    await submitBtn.click();  
-    await page.waitForTimeout(WAIT_TIMEOUT);
+    await submitBtn.click();
 
     const healedInputHandle = await page.locator('.test_class').elementHandle({ timeout: TIMEOUT });
     expect(healedInputHandle).toBeTruthy();
@@ -26,4 +23,3 @@ test.describe('Deprecated ElementHandle Methods - Tests', () => {
   });
 
 });
-
