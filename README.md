@@ -37,6 +37,10 @@ connection to the proxy is configured in the `playwright.config.ts`
 
 ```
 npx playwright test tests/test-env/selenium-like-page-api/css-1.spec.ts
+npx playwright test tests/test-env/selenium-like-locator-api/
+npx playwright test tests/test-env/playwright-specific/
+
+npx playwright test tests/test-env/playwright-specific/action.spec.ts
 ```
 
 ## docs
