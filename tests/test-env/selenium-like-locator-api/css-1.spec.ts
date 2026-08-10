@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { gotoTestEnv, MDN_CALLBACK_URL } from '../../../helpers/goto';
+import { gotoTestEnv, MDN_CALLBACK_URL } from '../../helpers/goto';
 import fs from 'fs';
 
 const TIMEOUT = 5000;

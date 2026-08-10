@@ -1,5 +1,5 @@
 import { test } from '@playwright/test';
-import { gotoTestEnv, TEST_ENV_URL } from '../../../helpers/goto';
+import { gotoTestEnv, TEST_ENV_URL } from '../../helpers/goto';
 
 const TIMEOUT = 5000;
 const WAIT_TIMEOUT = 350;
