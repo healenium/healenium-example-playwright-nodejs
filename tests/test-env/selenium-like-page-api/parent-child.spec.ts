@@ -1,11 +1,12 @@
 import { test, expect } from '@playwright/test';
+import { gotoTestEnv, TEST_ENV_URL } from '../../../helpers/goto';
 
 const TIMEOUT = 5000;
 const WAIT_TIMEOUT = 350;
 
 test.describe('Parent-Child Locator Tests', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('https://healenium.github.io/healenium-test-env/index.html', { waitUntil: 'load' });
+    await gotoTestEnv(page, TEST_ENV_URL);
   });
 
   test('Select and verify several inputs CSS FirstChild', async ({ page }) => {

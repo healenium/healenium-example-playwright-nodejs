@@ -1,15 +1,11 @@
-/**
- * Healing behaviour for Playwright expect(locator) property assertion methods.
- *
- * @see https://playwright.dev/docs/test-assertions
- */
 import { test, expect } from '@playwright/test';
+import { gotoTestEnv, TEST_ENV_URL } from '../../../helpers/goto';
 
 const TIMEOUT = 5000;
 
 test.describe('Expect - Property Assertions (healing)', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('https://healenium.github.io/healenium-test-env/index.html', { waitUntil: 'load' });
+    await gotoTestEnv(page, TEST_ENV_URL);
   });
 
   test('toHaveAttribute', async ({ page }) => {

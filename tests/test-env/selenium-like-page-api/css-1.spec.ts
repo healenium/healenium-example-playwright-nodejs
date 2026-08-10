@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { gotoTestEnv, MDN_CALLBACK_URL } from '../../../helpers/goto';
 
 const TIMEOUT = 5000;
 const WAIT_TIMEOUT = 350;
@@ -7,7 +8,7 @@ test.describe('CSS 1 Locator Tests', () => {
 
   test('Update locator for element with css attribute', async ({ page }) => {
     // Navigate to the callback test page
-    await page.goto('https://mdn.github.io/web-components-examples/life-cycle-callbacks/', { waitUntil: 'domcontentloaded' });
+    await gotoTestEnv(page, MDN_CALLBACK_URL);
 
     // Click add square button and verify square element
     const addSquareBtn = await page.$('//button[contains(@class, "add")]');

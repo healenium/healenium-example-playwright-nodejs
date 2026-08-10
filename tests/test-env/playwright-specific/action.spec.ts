@@ -1,11 +1,12 @@
 import { test, expect } from '@playwright/test';
+import { gotoTestEnv, TEST_ENV_URL } from '../../../helpers/goto';
 import path from 'path';
 
 const TIMEOUT = 5000;
 
 test.describe('Locator API - Action Methods - Tests', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('https://healenium.github.io/healenium-test-env/index.html', { waitUntil: 'load' });
+    await gotoTestEnv(page, TEST_ENV_URL);
   });
 
   test('click action', async ({ page }) => {

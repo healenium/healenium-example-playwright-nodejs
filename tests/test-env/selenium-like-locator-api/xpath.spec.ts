@@ -1,11 +1,12 @@
 import { test, expect } from '@playwright/test';
+import { gotoTestEnv, TEST_ENV_URL } from '../../../helpers/goto';
 
 const TIMEOUT = 5000;
 const WAIT_TIMEOUT = 250;
 
 test.describe('XPath Locator API Tests', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('https://healenium.github.io/healenium-test-env/index.html', { waitUntil: 'load' });
+    await gotoTestEnv(page, TEST_ENV_URL);
   });
 
   test('XPath with special characters', async ({ page }) => {
