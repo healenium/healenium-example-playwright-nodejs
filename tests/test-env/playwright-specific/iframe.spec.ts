@@ -32,7 +32,7 @@ test.describe('Locator API - iframe - Tests', () => {
     const healedInputField = iframe.locator('#iframe_input');
     await healedInputField.click({ timeout: TIMEOUT });
   });
-/*
+
   test('iframe - change frame title - select option action', async ({ page }) => {
     test.slow();
 
@@ -72,5 +72,5 @@ test.describe('Locator API - iframe - Tests', () => {
     await healedInputField.click({ timeout: TIMEOUT });
 
   });
-*/
+
 });
