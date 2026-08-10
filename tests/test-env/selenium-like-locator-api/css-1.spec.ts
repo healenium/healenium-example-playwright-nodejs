@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { gotoTestEnv, MDN_CALLBACK_URL } from '../../../helpers/goto';
 import fs from 'fs';
 
 const TIMEOUT = 5000;
@@ -9,7 +10,7 @@ test.describe('CSS 1 Locator Tests', () => {
   test('Update locator for element with css attribute', async ({ page }) => {
     // Navigate to the callback test page
     test.slow();
-    await page.goto('https://mdn.github.io/web-components-examples/life-cycle-callbacks/', { waitUntil: 'load' });
+    await gotoTestEnv(page, MDN_CALLBACK_URL);
 
     let content = await page.content();
     fs.writeFileSync('page-content/page-test-env-callback.html', content, 'utf-8');

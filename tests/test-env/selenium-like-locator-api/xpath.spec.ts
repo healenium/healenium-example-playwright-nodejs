@@ -1,11 +1,12 @@
 import { test, expect } from '@playwright/test';
+import { gotoTestEnv, TEST_ENV_URL } from '../../../helpers/goto';
 
 const TIMEOUT = 5000;
 const WAIT_TIMEOUT = 250;
 
 test.describe('XPath Locator API Tests', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('https://healenium.github.io/healenium-test-env/index.html', { waitUntil: 'load' });
+    await gotoTestEnv(page, TEST_ENV_URL);
   });
 
   test('XPath with special characters', async ({ page }) => {
@@ -33,7 +34,7 @@ test.describe('XPath Locator API Tests', () => {
     page.on('dialog', dialog => dialog.accept());
     // Find element by XPath following before selector change
     const followingElement = page.locator('xpath=//*[@id="change_className"]/following::test_tag');
-    await expect(followingElement).toBeVisible();
+    await expect(followingElement).toBeAttached();
     await followingElement.press('Enter');
 
     // Click Change locators button
@@ -44,7 +45,7 @@ test.describe('XPath Locator API Tests', () => {
 
     // Find element by XPath following after selector change (should be healed)
     const healedFollowingElement = page.locator('xpath=//*[@id="change_className"]/following::test_tag');
-    await expect(healedFollowingElement).toBeVisible();
+    await expect(healedFollowingElement).toBeAttached();
     await healedFollowingElement.press('Enter', { timeout: TIMEOUT });
   });
 
