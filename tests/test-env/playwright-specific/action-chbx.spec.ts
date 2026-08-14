@@ -5,7 +5,7 @@ const TIMEOUT = 5000;
 
 test.describe('Locator API - CheckBox Action Methods - Tests', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('https://healenium.github.io/healenium-test-env/index.html', { waitUntil: 'load' });
+    await gotoTestEnv(page, TEST_ENV_URL);
   });
 
   test('check action', async ({ page }) => {
