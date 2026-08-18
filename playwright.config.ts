@@ -40,16 +40,15 @@ export default defineConfig({
     /* Connect to Playwright server */
     connectOptions: {
       // wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'ws://localhost:5050',
-      wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'ws://localhost:8095/hlm-playwright-proxy',
-      // wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'ws://public-ip/hlm-playwright-proxy',
-      // wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'ws://public-ip/playwright-server',  // (port 80)
-      // wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'wss://public-ip/playwright-server', // (port 443)
+      // wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'ws://localhost:8095/hlm-playwright-proxy',
+      wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'wss://demo.healenium.lab.epam.com/hlm-playwright-proxy', // (port 443)
+      // wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'wss://demo.healenium.lab.epam.com/playwright-server', // (port 443)
       timeout: 60000,            // 60 seconds for WebSocket connection timeout
     },
     // Pass worker information to Healenium
-    extraHTTPHeaders: {
-      'X-Worker-ID': process.env.TEST_WORKER_INDEX || '0'
-    }
+    // extraHTTPHeaders: {
+    //   'X-Worker-ID': process.env.TEST_WORKER_INDEX || '0'
+    // }
   },
 
   /* Configure projects for major browsers */
