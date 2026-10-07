@@ -12,7 +12,7 @@ test.describe('Locator API - Action Methods - Tests', () => {
   test('click action', async ({ page }) => {
     test.slow();
 
-    const inputField = page.locator('.test_class');
+    const inputField = page.locator('input#change_className');
     await inputField.click({ timeout: TIMEOUT });
 
     // Click Change locators button to test healing
@@ -20,7 +20,7 @@ test.describe('Locator API - Action Methods - Tests', () => {
     await submitBtn.click();
 
     // Test healing - same action should work after locator change
-    const healedInputField = page.locator('.test_class');
+    const healedInputField = page.locator('input#change_className');
     await healedInputField.click({ timeout: TIMEOUT });
   });
 
@@ -54,7 +54,7 @@ test.describe('Locator API - Action Methods - Tests', () => {
 
   test('fill and clear actions', async ({ page }) => {
     test.slow();
-    const inputField = page.locator('.test_class');
+    const inputField = page.locator('input#change_className');
     await inputField.fill('Hello World', { timeout: TIMEOUT });
     await expect(inputField).toHaveValue('Hello World');
 
@@ -66,7 +66,7 @@ test.describe('Locator API - Action Methods - Tests', () => {
     await submitBtn.click();
 
     // Test healing - same actions should work after locator change
-    const healedInputField = page.locator('.test_class');
+    const healedInputField = page.locator('input#change_className');
     await healedInputField.fill('Hello World', { timeout: TIMEOUT });
     await expect(healedInputField).toHaveValue('Hello World');
 
@@ -76,7 +76,7 @@ test.describe('Locator API - Action Methods - Tests', () => {
 
   test('type action', async ({ page }) => {
     test.slow();
-    const inputField = page.locator('.test_class');
+    const inputField = page.locator('input#change_className');
     await inputField.type('Typing text slowly', { timeout: TIMEOUT });
     await expect(inputField).toHaveValue('Typing text slowly');
 
@@ -85,14 +85,14 @@ test.describe('Locator API - Action Methods - Tests', () => {
     await submitBtn.click();
 
     // Test healing - same action should work after locator change
-    const healedInputField = page.locator('.test_class');
+    const healedInputField = page.locator('input#change_className');
     await healedInputField.type('Typing text slowly', { timeout: TIMEOUT });
     await expect(healedInputField).toHaveValue('Typing text slowlyTyping text slowly');
   });
 
   test('press sequentially action', async ({ page }) => {
     test.slow();
-    const inputField = page.locator('.test_class');
+    const inputField = page.locator('input#change_className');
     await inputField.pressSequentially('Sequential typing', {
       delay: 100,
       timeout: TIMEOUT
@@ -104,7 +104,7 @@ test.describe('Locator API - Action Methods - Tests', () => {
     await submitBtn.click();
 
     // Test healing - same action should work after locator change
-    const healedInputField = page.locator('.test_class');
+    const healedInputField = page.locator('input#change_className');
     await healedInputField.pressSequentially('Sequential typing', {
       delay: 100,
       timeout: TIMEOUT
@@ -146,7 +146,7 @@ test.describe('Locator API - Action Methods - Tests', () => {
 
   test('focus and blur actions', async ({ page }) => {
     test.slow();
-    const inputField = page.locator('.test_class');
+    const inputField = page.locator('input#change_className');
     await inputField.focus({ timeout: TIMEOUT });
     await expect(inputField).toBeFocused();
     await inputField.blur({ timeout: TIMEOUT });
@@ -157,7 +157,7 @@ test.describe('Locator API - Action Methods - Tests', () => {
     await submitBtn.click();
 
     // Test healing - same actions should work after locator change
-    const healedInputField = page.locator('.test_class');
+    const healedInputField = page.locator('input#change_className');
     await healedInputField.focus({ timeout: TIMEOUT });
     await expect(healedInputField).toBeFocused();
     await healedInputField.blur({ timeout: TIMEOUT });
@@ -166,7 +166,7 @@ test.describe('Locator API - Action Methods - Tests', () => {
 
   test('scroll into view if needed action', async ({ page }) => {
     test.slow();
-    const inputField = page.locator('.test_class');
+    const inputField = page.locator('input#change_className');
     await inputField.scrollIntoViewIfNeeded({
       timeout: TIMEOUT,
       strict: true
@@ -178,7 +178,7 @@ test.describe('Locator API - Action Methods - Tests', () => {
     await submitBtn.click();
 
     // Test healing - same action should work after locator change
-    const healedInputField = page.locator('.test_class');
+    const healedInputField = page.locator('input#change_className');
     await healedInputField.scrollIntoViewIfNeeded({
       timeout: TIMEOUT,
       strict: true
@@ -188,7 +188,7 @@ test.describe('Locator API - Action Methods - Tests', () => {
 
   test('select text action', async ({ page }) => {
     test.slow();
-    const inputField = page.locator('.test_class');
+    const inputField = page.locator('input#change_className');
     await inputField.fill('Text to select', { timeout: TIMEOUT });
     await inputField.selectText({
       timeout: TIMEOUT,
@@ -201,7 +201,7 @@ test.describe('Locator API - Action Methods - Tests', () => {
     await submitBtn.click();
 
     // Test healing - same action should work after locator change
-    const healedInputField = page.locator('.test_class');
+    const healedInputField = page.locator('input#change_className');
     await healedInputField.fill('Text to select', { timeout: TIMEOUT });
     await healedInputField.selectText({
       timeout: TIMEOUT,
