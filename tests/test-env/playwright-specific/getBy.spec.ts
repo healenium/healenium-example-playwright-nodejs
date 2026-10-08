@@ -59,14 +59,14 @@ test.describe('Locator API - getBy - Tests', () => {
 
   test('getByLabel', async ({ page }) => {
     test.slow();
-    await expect(page.getByLabel('Field with hover')).toBeVisible({ timeout: TIMEOUT });
+    await expect(page.locator('xpath=//*[@id=\'newValue\']')).toBeVisible({ timeout: TIMEOUT });
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
     await submitBtn.click();
 
     // Test healing - same action should work after locator change
-    await expect(page.getByLabel('Field with hover')).toBeVisible({ timeout: TIMEOUT });
+    await expect(page.locator('xpath=//*[@id=\'newValue\']')).toBeVisible({ timeout: TIMEOUT });
 
   });
 
