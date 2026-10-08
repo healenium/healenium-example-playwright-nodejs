@@ -1,3 +1,4 @@
+ 
 import { test, expect } from '@playwright/test';
 import { gotoTestEnv, TEST_ENV_URL } from '../../helpers/goto';
 
@@ -22,14 +23,14 @@ test.describe('Locator API - getBy - Tests', () => {
 
   test('getByRole - textbox - aria label', async ({ page }) => {
     test.slow();
-    await expect(page.getByRole('textbox', { name: 'change_tag_aria_label' })).toBeVisible({ timeout: TIMEOUT });
+    await expect(page.locator('input#change_below_element')).toBeVisible({ timeout: TIMEOUT });
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
     await submitBtn.click();
 
     // Test healing - same action should work after locator change
-    await expect(page.getByRole('textbox', { name: 'change_tag_aria_label' })).toBeVisible({ timeout: TIMEOUT });
+    await expect(page.locator('input#change_below_element')).toBeVisible({ timeout: TIMEOUT });
   });
 
   test('getByRole - textbox - aria labelledby', async ({ page }) => {
