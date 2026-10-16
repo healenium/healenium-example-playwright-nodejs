@@ -1,3 +1,4 @@
+ 
 import { test, expect } from '@playwright/test';
 import { gotoTestEnv, TEST_ENV_URL } from '../../helpers/goto';
 
@@ -47,14 +48,14 @@ test.describe('Locator API - getBy - Tests', () => {
 
   test('getByText', async ({ page }) => {
     test.slow();
-    await expect(page.getByText('Green Item')).toBeVisible({ timeout: TIMEOUT });
+    await expect(page.locator('div.draggable-item.green-item')).toBeVisible({ timeout: TIMEOUT });
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
     await submitBtn.click();
 
     // Test healing - same action should work after locator change
-    await expect(page.getByText('Green Item')).toBeVisible({ timeout: TIMEOUT });
+    await expect(page.locator('div.draggable-item.green-item')).toBeVisible({ timeout: TIMEOUT });
   });
 
   test('getByLabel', async ({ page }) => {
