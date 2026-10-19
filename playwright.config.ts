@@ -1,4 +1,17 @@
 import { defineConfig } from '@playwright/test';
+import 'dotenv/config';
+
+/**
+ * Mobitru Basic auth for the upstream WebSocket (same as wss://user:apiKey@host/...).
+ * @returns {Record<string, string>}
+ */
+function mobitruConnectAuthHeaders() {
+  const user = process.env.MOBITRU_USER || 'HEALENIUM';
+  const apiKey = process.env.MOBITRU_API_KEY;
+  if (!apiKey) return {};
+  const token = Buffer.from(`${user}:${apiKey}`, 'utf8').toString('base64');
+  return { 'Authorization': `Basic ${token}` };
+}
 
 /**
  * @see https://playwright.dev/docs/test-configuration
@@ -12,7 +25,7 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 1,
   /* Opt out of parallel tests on CI. (undefined)*/
-  workers: process.env.CI ? 1 : 4,
+  workers: process.env.CI ? 1 : 8,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     // Standard line reporter for test progress
@@ -34,21 +47,21 @@ export default defineConfig({
     trace: 'on-first-retry',
 
     /* Timeout settings */
-    actionTimeout: 120000,        // 2 minutes for actions
-    navigationTimeout: 120000,    // 2 minutes for navigation
+    actionTimeout: 120_000,        // 2 minutes for actions
+    navigationTimeout: 120_000,    // 2 minutes for navigation
 
     /* Connect to Playwright server */
     connectOptions: {
       // wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'ws://localhost:5050',
-      // wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'ws://localhost:8095/hlm-playwright-proxy',
-      wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'wss://demo.healenium.lab.epam.com/hlm-playwright-proxy', // (port 443)
-      // wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'wss://demo.healenium.lab.epam.com/playwright-server', // (port 443)
+      wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'ws://localhost:8095/hlm-playwright-proxy',
+      // wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'ws://54.242.17.37/hlm-playwright-proxy',
       timeout: 60000,            // 60 seconds for WebSocket connection timeout
+      headers: {
+        // ...mobitruConnectAuthHeaders(),
+        // 'hlm-api-key': 'd816dd38-8934-4fc2-a170-97ae4dbddf3b', // tenantId
+        'hlm-locator-cache': 'false', // disable locator cache
+      },
     },
-    // Pass worker information to Healenium
-    // extraHTTPHeaders: {
-    //   'X-Worker-ID': process.env.TEST_WORKER_INDEX || '0'
-    // }
   },
 
   /* Configure projects for major browsers */

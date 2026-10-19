@@ -11,3 +11,6 @@ node_modules/
 /screeshots/
 /videos/
 screeshots/
+
+.env
+*.log
