@@ -3,7 +3,7 @@ import { gotoTestEnv, TEST_ENV_URL } from '../../helpers/goto';
 
 const TIMEOUT = 5000;
 
-// Supports ONLY:
+// with FRAME_NODEPATH_PER_SELECTOR=false
 // XPath, CSS, id selectors 
 // within all node path:
 // frame selector 0 >> frame selector 1 >> ... >> element selector		
@@ -70,7 +70,6 @@ test.describe('Locator API - iframe - Tests', () => {
     // Test healing - same action should work after locator change
     const healedInputField = page.frameLocator('iframe[title="Iframe Example"]').frameLocator('iframe[title="Nested iframe Example"]').locator('#iframe_2_input');
     await healedInputField.click({ timeout: TIMEOUT });
-
   });
 
 });
