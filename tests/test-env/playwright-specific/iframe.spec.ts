@@ -21,7 +21,7 @@ test.describe('Locator API - iframe - Tests', () => {
     const iframe = page.frameLocator('iframe[title="Iframe Example"]');
 
     // Test input field in iframe before selector change
-    const inputField = iframe.locator('#iframe_input');
+    const inputField = iframe.locator('input#iframe_input_changed');
     await inputField.click({ timeout: TIMEOUT });
 
     // Click Change locators button in iframe to test healing
@@ -29,7 +29,7 @@ test.describe('Locator API - iframe - Tests', () => {
     await submitBtn.click();
 
     // Test healing - same action should work after locator change
-    const healedInputField = iframe.locator('#iframe_input');
+    const healedInputField = iframe.locator('input#iframe_input_changed');
     await healedInputField.click({ timeout: TIMEOUT });
   });
 
