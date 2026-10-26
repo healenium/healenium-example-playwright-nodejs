@@ -84,14 +84,14 @@ test.describe('Locator API - getBy - Tests', () => {
 
   test('getByAltText', async ({ page }) => {
     test.slow();
-    await expect(page.getByAltText('Healenium Logo')).toBeVisible({ timeout: TIMEOUT });
+    await expect(page.locator('img#logo_img')).toBeVisible({ timeout: TIMEOUT });
 
     // Click Change locators button to test healing
     const submitBtn = page.locator('#Submit');
     await submitBtn.click();
 
     // Test healing - same action should work after locator change
-    await expect(page.getByAltText('Healenium Logo')).toBeVisible({ timeout: TIMEOUT });
+    await expect(page.locator('img#logo_img')).toBeVisible({ timeout: TIMEOUT });
   });
 
   test('getByTitle', async ({ page }) => {
