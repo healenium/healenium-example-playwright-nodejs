@@ -54,12 +54,13 @@ export default defineConfig({
     connectOptions: {
       // wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'ws://localhost:5050',
       wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'ws://localhost:8095/hlm-playwright-proxy',
-      // wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'ws://54.242.17.37/hlm-playwright-proxy',
+      // wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'wss://44.192.20.66/hlm-playwright-proxy',
       timeout: 60000,            // 60 seconds for WebSocket connection timeout
       headers: {
         // ...mobitruConnectAuthHeaders(),
-        // 'hlm-api-key': 'd816dd38-8934-4fc2-a170-97ae4dbddf3b', // tenantId
+        ...(process.env.HLM_API_KEY && { 'hlm-api-key': process.env.HLM_API_KEY }), // auth-false:tenantId; auth-true:apiKey
         'hlm-locator-cache': 'false', // disable locator cache
+        'hlm-settings': 'h-screenshot=true', 
       },
     },
   },

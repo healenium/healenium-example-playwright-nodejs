@@ -2,20 +2,37 @@
 
 ## prerequisites
 
-in the `playwright.config.ts`
+create `.env` in the project root, see .env.example
 
-connection to healenium proxy:
+`HLM_API_KEY` is sent as the `hlm-api-key` handshake header. With proxy auth off it is a tenant id. With auth on it is an API key.
+
+in the `playwright.config.js`
+
+connection to healenium proxy (`playwright.config.js`):
 ```
         connectOptions: {
-          // wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'ws://localhost:5050',
-          wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'ws://localhost:8080/playwright-proxy',
-          timeout: 600000,            // 60 seconds for WebSocket connection timeout
+          wsEndpoint: process.env.PLAYWRIGHT_SERVER_URL || 'ws://localhost:8095/hlm-playwright-proxy',
+          timeout: 60000,
+          headers: {
+            ...(process.env.HLM_API_KEY && { 'hlm-api-key': process.env.HLM_API_KEY }), // auth-false:tenantId; auth-true:apiKey
+            'hlm-locator-cache': 'false', // disable locator cache for this connection
+            'hlm-settings': 'h-screenshot=true',
+          },
         },
 ```
 
+`hlm-locator-cache` is `false`, `0`, or `no` to turn the session cache off. Any other value, or a missing header, leaves it on.
+
+`hlm-settings` overrides proxy settings for this connection. Comma-separated `key=value` pairs. Accepted keys: `healed-type`, `score-cap`, `recovery-tries`, `np-per-selector`, `h-screenshot`, `h-highlight`, `discovery-state`, `np_shortcut`, `np-probe-timeout`.
+
 ## build
-```
+
+playwright version must be exact as server version 
+
+```bash
 npm install
+# check version
+npx playwright --version
 ```
 
 ## run playwright server separately (optional)
